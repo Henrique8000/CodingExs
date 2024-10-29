@@ -1,34 +1,27 @@
 def main():
-    exibe_msg()
-    arquivo_path()
-    caminho_arquivo = arquivo_path()
-    abre_arquivo(caminho_arquivo)
-    arquivo = abre_arquivo()
-    caca_palavra(arquivo)
+    caminho = input("Insira o caminho do arquivo que você deseja abrir: ").strip()
+    plv = input("Qual palavra você deseja contar? ").strip()
 
-def exibe_msg():
-     print('vai começar o caça palavras!!!\n')
-
-
-def arquivo_path():
-    caminho = input("Insira o caminho relativo do arquivo: ")
-
-def abre_arquivo(n_arq):
-    with open(n_arq, "r") as arquivo:
-        arq = arquivo.readlines()
-        return arq
+    if plv != "" and caminho != "":
+        arq = abre_arquivo(caminho)
+        qtd = caca_palavra(plv, arq)
+        print(f"Achei {qtd} vezes a palavra '{plv}'")
+    else:
+        print("Obrigado, volte sempre!")
 
 
-def caca_palavra(arquivo, recebe):
+def abre_arquivo(path):
+    with open(f"{path}", "r", encoding="utf-8") as arquivo:
+        texto = arquivo.readlines()
+        return texto
+
+
+def caca_palavra(palavra, arquivo):
     n = 0
-    for frase in arquivo:
-        if recebe in frase:
+    for i in arquivo:
+        if palavra in i:
             n += 1
-    if n != 0:
-        print(f"\nAchei tantos '{frase}': {n}")
     return n
 
 
-
 main()
-
